@@ -21,35 +21,33 @@ namespace _3rdpartyemail.Controllers
         }
 
         [HttpPost]
+        [Obsolete]
         public IActionResult Index(IFormCollection form)
         {
-
             try
             {
+                string name = form["nm"];
+                string email = form["em"];
+                string message = form["msg"];
 
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("bilalabdullah5393@gmail.com", "bqyawuynnpdkhxrl");
 
-                string name = form["name"];
-                string email = form["email"];
-                string message = form["message"];
-
-                SmtpClient smtpclient = new SmtpClient("smpt@gmail.com", 587);
-                smtpclient.EnableSsl = true;
-                smtpclient.UseDefaultCredentials = false;
-                smtpclient.Credentials = new NetworkCredential("bilalabdullah@gmail.com", "AppPAssword");
-                MailMessage msg = new MailMessage("bilal@gmail.com", "shadab@gmail.com");
-                msg.Subject = name + "'s concern";
+                MailMessage msg = new MailMessage("bilalabdullah5393@gmail.com", "bilalabdullah5393@gmail.com");
+                msg.Subject = name + "'s Concern";
                 msg.Body = message;
                 msg.ReplyTo = new MailAddress(email);
-                smtpclient.Send(msg);
+                client.Send(msg);
 
-                return View();
-
+                ViewBag.Message = "Mail sent successfully";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                ViewBag.Message = ex.Message;
             }
+            return View();
 
         }
 

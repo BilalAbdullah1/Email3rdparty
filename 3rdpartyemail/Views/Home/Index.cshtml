@@ -6,20 +6,25 @@
 
 <form asp-action="Index" name="form">
 
-    
-        <p class="col-lg-4">
-            <label class="form-label">Name</label>
-            <input type="text" name="name" class="form-control" />
-        </p>
+    <p class="col-lg-4">
+        <label class="form-label">Name</label>
+        <input type="text" name="nm" class="form-control" />
+    </p>
 
     <p class="col-lg-4">
-            <label class="form-label">Email</label>
-            <input type="text" name="email" class="form-control" />
-        </p>
+        <label class="form-label">Email</label>
+        <input type="text" name="em" class="form-control" />
+    </p>
     <p class="col-lg-4">
-            <label class="form-label">Message</label>
-            <input type="text" name="message" class="form-control" />
-        </p>
-        <button type="submit" class="btn-primary">Send</button>
+        <label class="form-label">Message</label>
+        <input type="text" name="msg" class="form-control" />
+    </p>
+  
+    <input type="submit" class="btn-primary" value="Submit" />
 
+    @if (ViewBag.Message != null)
+    {
+        <b>@ViewBag.Message</b>
+    }
 </form>
+
